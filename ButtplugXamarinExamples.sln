@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleConnect.Android", "Si
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleConnect.iOS", "SimpleConnect\SimpleConnect.iOS\SimpleConnect.iOS.csproj", "{C85CE98E-A086-4811-AF28-87D4ADD28E8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleConnect", "SimpleConnect\SimpleConnect\SimpleConnect.csproj", "{390184FC-AFF0-418B-815C-6E0C6311CF0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleConnect", "SimpleConnect\SimpleConnect\SimpleConnect.csproj", "{390184FC-AFF0-418B-815C-6E0C6311CF0A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimpleConnect Project", "SimpleConnect Project", "{B410630E-182A-4479-8AC3-5F11876B37B7}"
 EndProject
@@ -93,6 +93,7 @@ Global
 		{C85CE98E-A086-4811-AF28-87D4ADD28E8F}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{C85CE98E-A086-4811-AF28-87D4ADD28E8F}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{C85CE98E-A086-4811-AF28-87D4ADD28E8F}.Debug|iPhone.Build.0 = Debug|iPhone
+		{C85CE98E-A086-4811-AF28-87D4ADD28E8F}.Debug|iPhone.Deploy.0 = Debug|iPhone
 		{C85CE98E-A086-4811-AF28-87D4ADD28E8F}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{C85CE98E-A086-4811-AF28-87D4ADD28E8F}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{C85CE98E-A086-4811-AF28-87D4ADD28E8F}.Debug|x64.ActiveCfg = Debug|iPhone

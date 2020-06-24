@@ -4,6 +4,7 @@ using Buttplug.Server.Managers.XamarinBluetoothManager;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SimpleConnect
@@ -37,7 +38,7 @@ namespace SimpleConnect
         async void HandleDeviceAdded(object aObj, DeviceAddedEventArgs aArgs)
         {
             _device = aArgs.Device;
-            Debug.WriteLine($"Found device ${_device.Name}");
+            Debug.WriteLine($"Found device {_device.Name}");
             await _client.StopScanningAsync();
             Device.BeginInvokeOnMainThread(() =>
             {
@@ -53,7 +54,7 @@ namespace SimpleConnect
                 btnVibrate.IsEnabled = false;
             });
 
-            Console.WriteLine($"Device connected: {aArgs.Device.Name}");
+            Debug.WriteLine($"Device connected: {aArgs.Device.Name}");
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -63,8 +64,37 @@ namespace SimpleConnect
 
         async Task ScanForDevices()
         {
-            Console.WriteLine("Scanning for devices until key is pressed. Found devices will be printed to console.");
-            await _client.StartScanningAsync();
+            try
+            {
+                // Android likes to prompt on use
+                // UWP does seem to care
+                // iOS prompts on app start
+                if (Device.RuntimePlatform == "Android")
+                {
+                    var status = await Device.InvokeOnMainThreadAsync(async () =>
+                        await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>());
+                    if (status != PermissionStatus.Granted)
+                    {
+                        status = await Device.InvokeOnMainThreadAsync(async () =>
+                            await Permissions.RequestAsync<Permissions.LocationWhenInUse>());
+                    }
+                    if (status != PermissionStatus.Granted)
+                    {
+                        Debug.WriteLine("Cannot scan for devices without Location permissions.");
+                        return;
+                    }
+                }
+
+                Debug.WriteLine(
+                    "Scanning for devices until key is pressed. Found devices will be printed to console.");
+                await _client.StartScanningAsync();
+            }
+            catch (PermissionException pe)
+            {
+                // If we set up the manifest wrong, UWP throws
+                Debug.WriteLine(pe.Message);
+            }
+
         }
 
         private async void Vibrate_Clicked(object sender, EventArgs e)
